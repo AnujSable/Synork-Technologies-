@@ -7,7 +7,7 @@ import { saveContactInquiry } from "./firebase-db.js";
 import { sendContactFormEmail, initializeEmailJS } from "./emailjs-service.js";
 import { getCurrentUser } from "./firebase-auth.js";
 
-// Initialize EmailJS on module load
+// Initialize client email helper on module load
 initializeEmailJS();
 
 /**
@@ -55,7 +55,7 @@ export async function handleContactFormSubmit(e, formElement, statusElement) {
 
     showStatus(statusElement, "Submitting your inquiry...", "pending");
 
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const contactData = {
       name: data.name.trim(),
       email: data.email.trim(),
@@ -64,7 +64,7 @@ export async function handleContactFormSubmit(e, formElement, statusElement) {
       phone: data.phone ? data.phone.trim() : "",
       company: data.company ? data.company.trim() : "",
       userId: currentUser ? currentUser.uid : null,
-      userEmail: currentUser ? currentUser.email : data.email,
+      userEmail: currentUser ? currentUser.email : data.email.trim(),
       source: "web_form",
     };
 

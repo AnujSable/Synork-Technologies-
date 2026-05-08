@@ -199,6 +199,7 @@
       }
       .section {
         padding: clamp(4rem, 8vw, 7rem) 0;
+        scroll-margin-top: calc(var(--nav-h) + 1rem);
       }
 
       /* ─── NAVBAR ─────────────────────────────────────────────────────────────── */
@@ -230,7 +231,7 @@
       .nav-logo {
         display: flex;
         align-items: center;
-        height: 38px;
+        height: 52px;
         flex-shrink: 0;
       }
       .nav-logo img {
@@ -1180,7 +1181,7 @@
       .footer-logo {
         display: flex;
         align-items: center;
-        height: 30px;
+        height: 42px;
       }
       .footer-logo img {
         height: 100%;
@@ -1311,18 +1312,17 @@
           <a href="/careers.html" class="nav-link">Careers</a>
         </div>
 
-        <div class="nav-actions">
-          </div>
+        <div class="nav-actions" style="display:flex; align-items:center; gap:0.75rem;">
           <!-- Logged out -->
           <div
             class="auth-logged-out"
-            style="align-items: center; gap: 0.75rem"
+            style="display:flex; align-items: center; gap: 0.75rem"
           >
             <a href="/login.html" class="btn-ghost">Log In</a>
             <a href="/signup.html" class="btn-primary">Get Started</a>
           </div>
           <!-- Logged in -->
-          <div class="auth-logged-in" style="align-items: center; gap: 0.75rem">
+          <div class="auth-logged-in" style="display:flex; align-items: center; gap: 0.75rem">
             <span id="nav-welcome"></span>
             <button id="logout-btn" class="btn-logout">
               <span class="material-symbols-rounded icon-sm">logout</span> Log
@@ -2074,6 +2074,7 @@
             <input
               class="form-control"
               id="gs-name"
+              name="name"
               type="text"
               placeholder="John Doe"
               required
@@ -2084,6 +2085,7 @@
             <input
               class="form-control"
               id="gs-email"
+              name="email"
               type="email"
               placeholder="john@company.com"
               required
@@ -2093,7 +2095,7 @@
             <label class="form-label" for="gs-service"
               >Service of Interest</label
             >
-            <select class="form-control" id="gs-service" required>
+            <select class="form-control" id="gs-service" name="service" required>
               <option value="" disabled selected>Select a Service</option>
               <option value="data-science-ai">
                 Data Science & AI Solutions
@@ -2124,7 +2126,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="gs-project-type">Project Type</label>
-            <select class="form-control" id="gs-project-type" required>
+            <select class="form-control" id="gs-project-type" name="projectType" required>
               <option value="" disabled selected>Select Type</option>
               <option value="new-development">New Development</option>
               <option value="enhancement">Existing System Enhancement</option>
@@ -2135,7 +2137,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="gs-budget">Budget Range</label>
-            <select class="form-control" id="gs-budget" required>
+            <select class="form-control" id="gs-budget" name="budget" required>
               <option value="" disabled selected>Select Range</option>
               <option value="under-10k">Under $10,000</option>
               <option value="10k-25k">$10,000 – $25,000</option>
@@ -2146,7 +2148,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="gs-timeline">Timeline</label>
-            <select class="form-control" id="gs-timeline" required>
+            <select class="form-control" id="gs-timeline" name="timeline" required>
               <option value="" disabled selected>Select Timeline</option>
               <option value="asap">ASAP</option>
               <option value="1-3-months">1–3 Months</option>
@@ -2161,6 +2163,7 @@
             <textarea
               class="form-control"
               id="gs-details"
+              name="details"
               placeholder="Describe your project requirements and goals..."
               rows="4"
               required
@@ -2441,13 +2444,19 @@
         .forEach((w) => barObs.observe(w));
 
       // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      const navHeight = document.getElementById("navbar")?.offsetHeight || 72;
+      document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((a) => {
         a.addEventListener("click", (e) => {
-          const target = document.querySelector(a.getAttribute("href"));
+          const href = a.getAttribute("href");
+          const target = href ? document.querySelector(href) : null;
           if (target) {
             e.preventDefault();
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-            closeMobileNav();
+            const targetTop = target.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: Math.max(targetTop - navHeight - 12, 0),
+              behavior: "smooth",
+            });
+            if (typeof closeMobileNav === "function") closeMobileNav();
           }
         });
       });

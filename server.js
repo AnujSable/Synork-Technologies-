@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,14 +15,19 @@ const inquiries = [];
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "dist")));
+
+const distPath = path.join(__dirname, "dist");
+const staticFolder = fs.existsSync(distPath) ? distPath : __dirname;
+app.use(express.static(staticFolder));
 
 // Contact form submission
 app.post("/api/contact", (req, res) => {
   const { name, email, service, details, phone = "", company = "" } = req.body;
 
   if (!name || !email || !service || !details) {
-    return res.status(400).json({ error: "Missing required fields: name, email, service, details" });
+    return res.status(400).json({
+      error: "Missing required fields: name, email, service, details",
+    });
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,13 +37,21 @@ app.post("/api/contact", (req, res) => {
 
   const inquiry = {
     id: inquiries.length + 1,
-    name, email, service, details, phone, company,
+    name,
+    email,
+    service,
+    details,
+    phone,
+    company,
     created_at: new Date().toISOString(),
   };
   inquiries.push(inquiry);
   console.log("New inquiry received:", { name, email, service });
 
-  res.status(201).json({ message: "Inquiry submitted successfully.", contactId: inquiry.id });
+  res.status(201).json({
+    message: "Inquiry submitted successfully.",
+    contactId: inquiry.id,
+  });
 });
 
 // Health check
@@ -52,7 +66,8 @@ app.get("/api/inquiries", (req, res) => {
 
 // SPA fallback
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  const indexFile = path.join(staticFolder, "index.html");
+  res.sendFile(indexFile);
 });
 
 app.listen(PORT, () => {
