@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "projectId": "prj_EQM00E8hvEGfFWTVLcYRJzhD2pll",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ]
+}

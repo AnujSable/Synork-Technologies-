@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Log in to your Synork account." />
+    <title>Synork | Log In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #080c14;
+        --bg-card: #0d1420;
+        --bg-elevated: #111926;
+        --border: rgba(255, 255, 255, 0.07);
+        --border-hover: rgba(99, 176, 255, 0.35);
+        --accent: #3fa8ff;
+        --accent-2: #00e5c3;
+        --accent-glow: rgba(63, 168, 255, 0.18);
+        --text-primary: #e8edf5;
+        --text-secondary: #8a95a8;
+        --text-muted: #4e5a6e;
+        --gradient-hero: linear-gradient(135deg, #3fa8ff 0%, #00e5c3 100%);
+        --font-display: "Syne", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --radius-pill: 9999px;
+        --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: rgba(63, 168, 255, 0.25);
+        color: #fff;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font: inherit;
+      }
+
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(rgba(63, 168, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(63, 168, 255, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+      .bg-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        z-index: -1;
+      }
+      .bg-orb-1 {
+        width: 500px;
+        height: 500px;
+        top: -150px;
+        left: -150px;
+        background: rgba(63, 168, 255, 0.07);
+      }
+      .bg-orb-2 {
+        width: 400px;
+        height: 400px;
+        bottom: -100px;
+        right: -100px;
+        background: rgba(0, 229, 195, 0.05);
+      }
+
+      /* NAV */
+      nav {
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(8, 12, 20, 0.85);
+        backdrop-filter: blur(20px);
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        height: 32px;
+      }
+      .nav-logo img {
+        height: 100%;
+        width: auto;
+      }
+      .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-family: var(--font-display);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 0.4rem 0.875rem;
+        transition: all var(--transition);
+      }
+      .btn-back:hover {
+        color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .btn-back .material-symbols-rounded {
+        font-size: 18px;
+      }
+
+      /* MAIN */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5rem clamp(1rem, 4vw, 3rem);
+      }
+      .login-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        max-width: 980px;
+        width: 100%;
+      }
+
+      /* LEFT PANEL */
+      .login-panel-left {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .login-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(63, 168, 255, 0.08);
+        border: 1px solid rgba(63, 168, 255, 0.2);
+        border-radius: var(--radius-pill);
+        padding: 0.35rem 1rem;
+        width: fit-content;
+      }
+      .login-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        box-shadow: 0 0 8px var(--accent-2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .login-badge span {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(163, 230, 255, 0.85);
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 0.7;
+        }
+      }
+      .login-headline {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+      }
+      .text-gradient {
+        background: var(--gradient-hero);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .login-sub {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        max-width: 380px;
+      }
+
+      .info-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .info-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.125rem 1.25rem;
+      }
+      .info-card-title {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+      .info-card ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .info-card ul li {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+      .info-card ul li::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        flex-shrink: 0;
+      }
+
+      /* RIGHT FORM CARD */
+      .login-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: clamp(1.75rem, 4vw, 2.5rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .login-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-hero);
+      }
+      .card-heading {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.375rem;
+      }
+      .card-sub {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+      }
+
+      /* Form */
+      .form-group {
+        margin-bottom: 1.125rem;
+      }
+      .form-label-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .form-label {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .form-link {
+        font-size: 0.75rem;
+        color: var(--accent);
+        transition: color var(--transition);
+      }
+      .form-link:hover {
+        color: var(--accent-2);
+      }
+      .input-wrap {
+        position: relative;
+      }
+      .form-input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 0.8rem 1rem;
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        transition: all var(--transition);
+        outline: none;
+      }
+      .form-input::placeholder {
+        color: var(--text-muted);
+      }
+      .form-input:focus {
+        border-color: rgba(63, 168, 255, 0.4);
+        background: rgba(63, 168, 255, 0.04);
+        box-shadow: 0 0 0 3px rgba(63, 168, 255, 0.08);
+      }
+      .form-input.has-icon {
+        padding-right: 2.75rem;
+      }
+      .input-icon-btn {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        transition: color var(--transition);
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+      .input-icon-btn:hover {
+        color: var(--accent);
+      }
+      .input-icon-btn .material-symbols-rounded {
+        font-size: 20px;
+      }
+
+      .btn-submit {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.9375rem;
+        color: #fff;
+        background: var(--gradient-hero);
+        border-radius: var(--radius-sm);
+        padding: 0.9rem;
+        box-shadow: 0 0 25px rgba(63, 168, 255, 0.2);
+        transition: all var(--transition);
+        margin-top: 0.5rem;
+      }
+      .btn-submit:hover {
+        box-shadow: 0 0 40px rgba(63, 168, 255, 0.4);
+        transform: translateY(-1px);
+      }
+      .btn-submit:disabled {
+        opacity: 0.6;
+        transform: none;
+        cursor: not-allowed;
+      }
+
+      .status-box {
+        display: none;
+        margin-bottom: 1.25rem;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+      }
+      .status-box.error {
+        background: rgba(248, 113, 113, 0.08);
+        border: 1px solid rgba(248, 113, 113, 0.25);
+        color: #f87171;
+        display: block;
+      }
+      .status-box.success {
+        background: rgba(74, 222, 128, 0.08);
+        border: 1px solid rgba(74, 222, 128, 0.25);
+        color: #4ade80;
+        display: block;
+      }
+
+      .card-footer-text {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+      .card-footer-text a {
+        color: var(--accent);
+        font-weight: 600;
+        transition: color var(--transition);
+      }
+      .card-footer-text a:hover {
+        color: var(--accent-2);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .login-wrap {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .login-panel-left {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+    <nav>
+      <a href="/index.html" class="nav-logo" aria-label="Synork Home">
+        <img src="/public/logo.png" alt="Synork" />
+      </a>
+      <a href="/index.html" class="btn-back">
+        <span class="material-symbols-rounded">arrow_back</span>
+        Back to Home
+      </a>
+    </nav>
+
+    <main>
+      <div class="login-wrap">
+        <!-- Left Info Panel -->
+        <div class="login-panel-left">
+          <div class="login-badge">
+            <div class="login-badge-dot"></div>
+            <span>Secure Access</span>
+          </div>
+          <h1 class="login-headline">
+            Welcome back to<br />
+            <span class="text-gradient">Synork</span>
+          </h1>
+          <p class="login-sub">
+            Sign in to your Synork dashboard and continue building intelligent
+            solutions with faster access and secure workflows.
+          </p>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-card-title">Why sign in?</div>
+              <ul>
+                <li>Personalized project insights</li>
+                <li>Secure access to your dashboard</li>
+                <li>Faster onboarding for new challenges</li>
+              </ul>
+            </div>
+            <div class="info-card">
+              <div class="info-card-title">Need support?</div>
+              <ul>
+                <li>
+                  Email:
+                  <a
+                    href="mailto:synorktechnologies@gmail.com"
+                    style="color: var(--accent)"
+                    >synorktechnologies@gmail.com</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form -->
+        <div class="login-card">
+          <div id="loginError" class="status-box"></div>
+          <div id="loginSuccess" class="status-box"></div>
+
+          <h2 class="card-heading">Log in to your account</h2>
+          <p class="card-sub">
+            Securely access your dashboard and intelligent workflows.
+          </p>
+
+          <form id="loginForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input
+                class="form-input"
+                id="email"
+                type="email"
+                placeholder="john@company.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group">
+              <div class="form-label-row">
+                <label class="form-label" for="password">Password</label>
+                <a href="#" class="form-link">Forgot Password?</a>
+              </div>
+              <div class="input-wrap">
+                <input
+                  class="form-input has-icon"
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  required
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="input-icon-btn"
+                  aria-label="Toggle password visibility"
+                >
+                  <span class="material-symbols-rounded">visibility</span>
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit" id="loginBtn">
+              Log In
+              <span class="material-symbols-rounded" style="font-size: 20px"
+                >login</span
+              >
+            </button>
+          </form>
+
+          <div class="card-footer-text">
+            Don't have an account? <a href="/signup.html">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      // Firebase Login Module
+      // Requires firebase-config.js and firebase-auth.js to be configured
+
+      import { loginUser, onAuthStateListener } from "./src/firebase-auth.js";
+
+      // Check if already logged in
+      onAuthStateListener((user) => {
+        if (user) {
+          window.location.href = "/index.html";
+        }
+      });
+
+      // Toggle password visibility
+      const togglePasswordBtn = document.getElementById("togglePassword");
+      if (togglePasswordBtn) {
+        togglePasswordBtn.addEventListener("click", function () {
+          const passwordInput = document.getElementById("password");
+          const icon = this.querySelector(".material-symbols-rounded");
+          passwordInput.type =
+            passwordInput.type === "password" ? "text" : "password";
+          icon.textContent =
+            passwordInput.type === "password" ? "visibility" : "visibility_off";
+        });
+      }
+
+      // Handle login form submission
+      const loginForm = document.getElementById("loginForm");
+      if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const errorEl = document.getElementById("loginError");
+          const successEl = document.getElementById("loginSuccess");
+          const loginBtn = document.getElementById("loginBtn");
+          const originalBtnText = loginBtn.innerHTML;
+
+          // Reset messages
+          errorEl.className = "status-box";
+          successEl.className = "status-box";
+
+          // Validate input
+          if (!email || !password) {
+            errorEl.className = "status-box error";
+            errorEl.textContent = "Please enter both email and password.";
+            return;
+          }
+
+          try {
+            // Disable button and show loading state
+            loginBtn.disabled = true;
+            loginBtn.innerHTML =
+              '<span class="material-symbols-rounded" style="font-size:20px;">hourglass_empty</span> Logging in…';
+
+            // Attempt login
+            const user = await loginUser(email, password);
+
+            // Success
+            successEl.className = "status-box success";
+            successEl.textContent = "✓ Login successful! Redirecting…";
+
+            // Store user data locally for quick access
+            localStorage.setItem("synork_user", JSON.stringify(user));
+
+            // Redirect after short delay
+            setTimeout(() => {
+              window.location.href = "/index.html";
+            }, 1000);
+          } catch (error) {
+            // Show error message
+            errorEl.className = "status-box error";
+            errorEl.textContent =
+              error.message || "Login failed. Please try again.";
+
+            // Re-enable button
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = originalBtnText;
+
+            console.error("Login error:", error);
+          }
+        });
+      }
+
+      // Forgot password link
+      const forgotPasswordLink = document.querySelector(".form-link");
+      if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          const email = document.getElementById("email").value.trim();
+
+          if (!email) {
+            alert("Please enter your email address first.");
+            return;
+          }
+
+          // You can implement password reset here
+          alert(
+            "Password reset functionality will be implemented. Check your email for reset instructions.",
+          );
+        });
+      }
+    </script>
+  </body>
+</html>

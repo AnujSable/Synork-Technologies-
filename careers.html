@@ -1,0 +1,1084 @@
+<!doctype html>
+<html class="dark scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Careers | Synork</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      #mobile-menu {
+        display: none;
+      }
+      #mobile-menu.open {
+        display: flex;
+      }
+      .auth-logged-in {
+        display: none;
+      }
+      .auth-logged-out {
+        display: flex;
+      }
+      body.logged-in .auth-logged-in {
+        display: flex;
+      }
+      body.logged-in .auth-logged-out {
+        display: none;
+      }
+      @media (max-width: 640px) {
+        .hero-h1 {
+          font-size: 2rem !important;
+          line-height: 1.2;
+        }
+      }
+      .internship-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+        border-color: rgba(56, 189, 248, 0.5);
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+      <div
+        class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px]"
+      ></div>
+      <div
+        class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary-container/5 rounded-full blur-[150px]"
+      ></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.1)] border-b border-surface-container-high"
+    >
+      <div
+        class="flex justify-between items-center h-16 md:h-20 px-4 md:px-12 max-w-[1280px] mx-auto"
+      >
+        <a class="flex items-center h-16 md:h-20 shrink-0" href="#">
+          <img
+            alt="Synork Logo"
+            class="h-full w-auto object-contain"
+            src="/logo.png"
+          />
+        </a>
+
+        <!-- Desktop links -->
+        <div
+          class="hidden md:flex items-center gap-6 lg:gap-8 font-['Space_Grotesk'] tracking-tight"
+        >
+          <a
+            class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            href="/index.html#about"
+            >About</a
+          >
+          <a
+            class="text-[#94A3B8] hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg no-underline"
+            href="/index.html#services"
+            >Services</a
+          >
+          <a
+            class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            href="/index.html#contact"
+            >Contact</a
+          >
+          <a
+            class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            href="/careers.html"
+            >Careers</a
+          >
+        </div>
+
+        <!-- Desktop CTA -->
+        <div class="hidden md:flex items-center gap-3">
+          <div class="auth-logged-out items-center gap-3">
+            <a
+              class="inline-flex items-center justify-center px-4 py-2 border border-outline-variant text-on-surface text-sm rounded hover:bg-surface-container-high transition-colors"
+              href="/login.html"
+              >Log In</a
+            >
+            <a
+              class="inline-flex items-center justify-center px-4 py-2 bg-primary-container text-on-primary-container text-sm rounded font-semibold hover:bg-primary transition-colors glow-primary"
+              href="/signup.html"
+              >Sign Up</a
+            >
+          </div>
+          <div class="auth-logged-in items-center gap-3">
+            <span
+              id="nav-user-name"
+              class="text-slate-300 text-sm font-['Space_Grotesk']"
+            ></span>
+            <button
+              id="logout-btn"
+              class="inline-flex items-center gap-1 px-4 py-2 border border-outline-variant text-slate-400 text-sm rounded hover:border-red-500 hover:text-red-400 transition-colors"
+            >
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+              Log Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Hamburger -->
+        <button
+          id="mobile-menu-toggle"
+          class="md:hidden text-slate-400 hover:text-sky-400 transition-colors p-2"
+        >
+          <span id="menu-icon" class="material-symbols-outlined text-[28px]"
+            >menu</span
+          >
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden flex-col bg-slate-950/98 border-t border-slate-800 px-4 py-3 gap-1"
+      >
+        <a
+          class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
+          href="/index.html#about"
+          onclick="closeMobileMenu()"
+          >About</a
+        >
+        <a
+          class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
+          href="/index.html#services"
+          onclick="closeMobileMenu()"
+          >Services</a
+        >
+        <a
+          class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
+          href="/index.html#contact"
+          onclick="closeMobileMenu()"
+          >Contact</a
+        >
+        <a
+          class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
+          href="/careers.html"
+          onclick="closeMobileMenu()"
+          >Careers</a
+        >
+        <div class="border-t border-slate-800 pt-3 mt-1 flex flex-col gap-2">
+          <div class="auth-logged-out flex-col gap-2">
+            <a
+              class="flex items-center justify-center px-4 py-3 border border-outline-variant text-on-surface rounded text-sm hover:bg-surface-container-high transition-colors"
+              href="/login.html"
+              >Log In</a
+            >
+            <a
+              class="flex items-center justify-center px-4 py-3 bg-primary-container text-on-primary-container rounded font-semibold text-sm hover:bg-primary transition-colors"
+              href="/signup.html"
+              >Sign Up</a
+            >
+          </div>
+          <div class="auth-logged-in flex-col gap-2">
+            <span
+              id="nav-user-name-mobile"
+              class="text-slate-300 text-sm px-3 py-2 block"
+            ></span>
+            <button
+              id="logout-btn-mobile"
+              class="flex items-center justify-center gap-1 px-4 py-3 border border-outline-variant text-slate-400 rounded text-sm hover:border-red-500 hover:text-red-400 transition-colors w-full"
+            >
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+              Log Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-32 pb-24">
+      <!-- CAREERS HERO -->
+      <section
+        class="px-4 sm:px-6 md:px-12 max-w-[1280px] mx-auto py-16 mb-16"
+        style="scroll-margin-top: 6rem"
+      >
+        <div class="max-w-7xl mx-auto text-center">
+          <h1
+            class="text-gradient mb-6 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-['Space_Grotesk'] tracking-tight leading-[1.1] md:leading-[1.2]"
+          >
+            Join Our Team
+          </h1>
+
+          <p
+            class="text-on-surface-variant max-w-2xl mx-auto text-base md:text-xl leading-relaxed"
+          >
+            Explore exciting
+            <span class="text-[#12c0af] font-bold">internship</span>
+            opportunities and kickstart your career in technology.
+          </p>
+        </div>
+
+        <!-- Internship Sections -->
+        <div class="space-y-12">
+          <!-- Development -->
+          <div>
+            <h2
+              class="text-on-surface text-2xl font-bold font-['Space_Grotesk'] mb-6"
+            >
+              Development
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Software Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Build robust software solutions.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Web Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Create dynamic web applications.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Full Stack Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  End-to-end application development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Mobile App Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Develop mobile applications.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  UI/UX Design
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Design user interfaces and experiences.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Front End Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Focus on client-side development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Flutter Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Build cross-platform apps with Flutter.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data -->
+          <div>
+            <h2
+              class="text-on-surface text-2xl font-bold font-['Space_Grotesk'] mb-6"
+            >
+              Data
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Science
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Analyze and interpret complex data.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Analysis using Python
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Python-based data analysis.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Machine Learning
+                </h3>
+                <p class="text-on-surface-variant mb-4">Develop ML models.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Computer Vision
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Work with image and video data.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Engineering
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Build data pipelines.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Business Intelligence
+                </h3>
+                <p class="text-on-surface-variant mb-4">Create BI solutions.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Analysis Using MS Excel
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Excel-based data analysis.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Visualization Power BI
+                </h3>
+                <p class="text-on-surface-variant mb-4">Power BI dashboards.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Visualization Tableau
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Tableau visualizations.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Business Analytics
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Business data analytics.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Visualization
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  General data visualization.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Data Reporting
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Generate data reports.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Financial Data
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Financial data analysis.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Healthcare Data
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Healthcare data management.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business -->
+          <div>
+            <h2
+              class="text-on-surface text-2xl font-bold font-['Space_Grotesk'] mb-6"
+            >
+              Business
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Marketing
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Marketing strategies.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Digital Marketing
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Online marketing campaigns.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Business Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Grow business opportunities.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Finance
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Financial analysis and planning.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Operations
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Operational efficiency.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Human Resources
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  HR management and recruitment.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programming -->
+          <div>
+            <h2
+              class="text-on-surface text-2xl font-bold font-['Space_Grotesk'] mb-6"
+            >
+              Programming
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Java Developer
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Java application development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Python Developer
+                </h3>
+                <p class="text-on-surface-variant mb-4">Python programming.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Java Script Developer
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  JavaScript development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  .Net Developer
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  .NET framework development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  ios Developer
+                </h3>
+                <p class="text-on-surface-variant mb-4">iOS app development.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  C/C++ Programming
+                </h3>
+                <p class="text-on-surface-variant mb-4">C/C++ development.</p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Internet Of Things -->
+          <div>
+            <h2
+              class="text-on-surface text-2xl font-bold font-['Space_Grotesk'] mb-6"
+            >
+              Internet Of Things
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  IOT Development
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  IoT device development.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="internship-card bg-surface-container rounded-xl border border-surface-container-highest p-6"
+              >
+                <h3 class="text-on-surface text-xl font-semibold mb-3">
+                  Embedded Systems
+                </h3>
+                <p class="text-on-surface-variant mb-4">
+                  Embedded system programming.
+                </p>
+                <a
+                  href="https://forms.gle/gcJzTv5czoW5BhJ3A"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary-container rounded font-semibold hover:bg-primary transition-colors"
+                >
+                  Apply Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 py-10">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-6 px-4 sm:px-6 md:px-12 max-w-[1280px] mx-auto"
+      >
+        <div class="flex items-center h-9">
+          <img
+            alt="Synork Logo"
+            class="h-full w-auto object-contain"
+            src="/logo.png"
+          />
+        </div>
+        <div
+          class="flex flex-wrap justify-center gap-4 md:gap-6 font-['Space_Grotesk'] text-sm"
+        >
+          <a
+            class="text-slate-500 hover:text-slate-100 transition-colors"
+            href="/index.html#about"
+            >About</a
+          >
+          <a
+            class="text-slate-500 hover:text-slate-100 transition-colors"
+            href="/index.html#services"
+            >Services</a
+          >
+          <a
+            class="text-slate-500 hover:text-slate-100 transition-colors"
+            href="/index.html#contact"
+            >Contact</a
+          >
+          <a
+            class="text-slate-500 hover:text-slate-100 transition-colors"
+            href="/careers.html"
+            >Careers</a
+          >
+        </div>
+        <div class="font-['Space_Grotesk'] text-sm text-slate-500 text-center">
+          © 2026 Synork. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu
+      const toggle = document.getElementById("mobile-menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      toggle.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        menuIcon.textContent = open ? "close" : "menu";
+      });
+      function closeMobileMenu() {
+        menu.classList.remove("open");
+        menuIcon.textContent = "menu";
+      }
+      document.addEventListener("click", (e) => {
+        if (!toggle.contains(e.target) && !menu.contains(e.target))
+          closeMobileMenu();
+      });
+
+      // Auth
+      function checkAuth() {
+        const user = JSON.parse(localStorage.getItem("synork_user") || "null");
+        if (user) {
+          document.body.classList.add("logged-in");
+          document.getElementById("nav-user-name").textContent =
+            "Hi, " + user.firstName;
+          document.getElementById("nav-user-name-mobile").textContent =
+            "Hi, " + user.firstName;
+        } else {
+          document.body.classList.remove("logged-in");
+        }
+      }
+      function logout() {
+        localStorage.removeItem("synork_user");
+        checkAuth();
+      }
+      document.getElementById("logout-btn").addEventListener("click", logout);
+      document
+        .getElementById("logout-btn-mobile")
+        .addEventListener("click", logout);
+      checkAuth();
+
+      // Fade-in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Add fade-in class to sections
+      document.querySelectorAll("section, .internship-card").forEach((el) => {
+        el.classList.add("fade-in");
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

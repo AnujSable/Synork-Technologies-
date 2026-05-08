@@ -1,0 +1,2456 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Synork — AI-powered data science, cloud engineering, and intelligent software solutions for modern enterprises."
+    />
+    <meta name="theme-color" content="#080c14" />
+    <title>Synork | Innovate with Intelligence</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+
+    <!-- Fonts: Syne (display) + DM Sans (body) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ─── DESIGN TOKENS ─────────────────────────────────────────────────────── */
+      :root {
+        --bg: #080c14;
+        --bg-card: #0d1420;
+        --bg-card-hover: #111928;
+        --bg-elevated: #111926;
+        --border: rgba(255, 255, 255, 0.07);
+        --border-hover: rgba(99, 176, 255, 0.35);
+        --accent: #3fa8ff;
+        --accent-2: #00e5c3;
+        --accent-glow: rgba(63, 168, 255, 0.18);
+        --accent-glow-strong: rgba(63, 168, 255, 0.32);
+        --text-primary: #e8edf5;
+        --text-secondary: #8a95a8;
+        --text-muted: #4e5a6e;
+        --gradient-hero: linear-gradient(135deg, #3fa8ff 0%, #00e5c3 100%);
+        --gradient-card: linear-gradient(
+          135deg,
+          rgba(63, 168, 255, 0.08) 0%,
+          rgba(0, 229, 195, 0.04) 100%
+        );
+        --font-display: "Syne", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --radius-lg: 24px;
+        --radius-pill: 9999px;
+        --nav-h: 72px;
+        --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ─── RESET & BASE ──────────────────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 16px;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::selection {
+        background: rgba(63, 168, 255, 0.25);
+        color: #fff;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font: inherit;
+      }
+
+      /* ─── SCROLLBAR ─────────────────────────────────────────────────────────── */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(63, 168, 255, 0.25);
+        border-radius: 3px;
+      }
+
+      /* ─── ANIMATED BACKGROUND ───────────────────────────────────────────────── */
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(rgba(63, 168, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(63, 168, 255, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+      .bg-orb {
+        position: fixed;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        animation: orbFloat 20s ease-in-out infinite;
+      }
+      .bg-orb-1 {
+        width: 600px;
+        height: 600px;
+        top: -200px;
+        left: -200px;
+        background: rgba(63, 168, 255, 0.06);
+      }
+      .bg-orb-2 {
+        width: 500px;
+        height: 500px;
+        bottom: -150px;
+        right: -150px;
+        background: rgba(0, 229, 195, 0.05);
+        animation-delay: -10s;
+      }
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(30px, -40px) scale(1.05);
+        }
+        66% {
+          transform: translate(-20px, 30px) scale(0.97);
+        }
+      }
+
+      /* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
+      .display-xl {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 6vw, 5.2rem);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+      .display-lg {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .display-md {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.015em;
+      }
+      .text-gradient {
+        background: var(--gradient-hero);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .label-tag {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      /* ─── LAYOUT ─────────────────────────────────────────────────────────────── */
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+      }
+      .section {
+        padding: clamp(4rem, 8vw, 7rem) 0;
+      }
+
+      /* ─── NAVBAR ─────────────────────────────────────────────────────────────── */
+      #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: var(--nav-h);
+        background: rgba(8, 12, 20, 0.6);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid var(--border);
+        transition:
+          background var(--transition),
+          box-shadow var(--transition);
+      }
+      #navbar.scrolled {
+        background: rgba(8, 12, 20, 0.92);
+        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--nav-h);
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        height: 38px;
+        flex-shrink: 0;
+      }
+      .nav-logo img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+      .nav-link {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        padding: 0.5rem 0.875rem;
+        border-radius: var(--radius-sm);
+        transition:
+          color var(--transition),
+          background var(--transition);
+      }
+      .nav-link:hover {
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      @media (max-width: 900px) {
+      }
+      .btn-ghost {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        padding: 0.5rem 1.125rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        transition: all var(--transition);
+      }
+      .btn-ghost:hover {
+        color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .btn-primary {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #fff;
+        padding: 0.5rem 1.25rem;
+        background: var(--gradient-hero);
+        border-radius: var(--radius-pill);
+        transition: all var(--transition);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(63, 168, 255, 0.2);
+      }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0);
+        transition: background var(--transition);
+      }
+      .btn-primary:hover::before {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 0 35px rgba(63, 168, 255, 0.4);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile nav */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--text-secondary);
+        border-radius: 2px;
+        transition: all var(--transition);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      #mobile-nav {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        z-index: 99;
+        background: rgba(8, 12, 20, 0.97);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        padding: 1rem 0;
+        flex-direction: column;
+      }
+      #mobile-nav.open {
+        display: flex;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        padding: 0.875rem 1.5rem;
+        transition:
+          color var(--transition),
+          background var(--transition);
+      }
+      .mobile-nav-link:hover {
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .mobile-nav-divider {
+        border-top: 1px solid var(--border);
+        margin: 0.5rem 0;
+      }
+      .mobile-nav-actions {
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+      }
+
+      /* Auth states */
+      .auth-logged-in {
+        display: none;
+      }
+      .auth-logged-out {
+        display: flex;
+      }
+      body.logged-in .auth-logged-in {
+        display: flex;
+      }
+      body.logged-in .auth-logged-out {
+        display: none;
+      }
+      .mobile-auth-logged-in {
+        display: none;
+      }
+      .mobile-auth-logged-out {
+        display: flex;
+      }
+      body.logged-in .mobile-auth-logged-in {
+        display: flex;
+      }
+      body.logged-in .mobile-auth-logged-out {
+        display: none;
+      }
+
+      #nav-welcome {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+      }
+      .btn-logout {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        padding: 0.4rem 0.875rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        transition: all var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .btn-logout:hover {
+        border-color: rgba(239, 68, 68, 0.4);
+        color: #f87171;
+      }
+      .icon-sm {
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      /* ─── HERO ───────────────────────────────────────────────────────────────── */
+      #hero {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: calc(var(--nav-h) + 2rem);
+        padding-bottom: 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-glow {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(63, 168, 255, 0.12) 0%,
+          transparent 65%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(63, 168, 255, 0.08);
+        border: 1px solid rgba(63, 168, 255, 0.2);
+        border-radius: var(--radius-pill);
+        padding: 0.35rem 1rem 0.35rem 0.6rem;
+        margin-bottom: 1.75rem;
+      }
+      .hero-badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        box-shadow: 0 0 8px var(--accent-2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 0.7;
+        }
+      }
+      .hero-badge span {
+        color: rgba(163, 230, 255, 0.85);
+      }
+      .hero-btns {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2.5rem;
+        flex-wrap: wrap;
+      }
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.9375rem;
+        color: #fff;
+        background: var(--gradient-hero);
+        padding: 0.875rem 2rem;
+        border-radius: var(--radius-pill);
+        box-shadow: 0 0 30px rgba(63, 168, 255, 0.25);
+        transition: all var(--transition);
+      }
+      .btn-hero-primary:hover {
+        box-shadow: 0 0 50px rgba(63, 168, 255, 0.45);
+        transform: translateY(-2px);
+      }
+      .btn-hero-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 0.875rem 1.75rem;
+        border-radius: var(--radius-pill);
+        transition: all var(--transition);
+      }
+      .btn-hero-secondary:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      /* Hero stats widget */
+      .hero-widget {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 1.75rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-widget::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-hero);
+      }
+      .widget-title {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+      }
+      .widget-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.875rem;
+      }
+      .widget-stat-label {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+      }
+      .widget-stat-value {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .widget-bar-wrap {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-top: 0.375rem;
+        margin-bottom: 0.75rem;
+      }
+      .widget-bar {
+        height: 100%;
+        background: var(--gradient-hero);
+        border-radius: 2px;
+        transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .widget-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        box-shadow: 0 0 6px var(--accent-2);
+        animation: pulse 2s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+      .status-text {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      /* Floating mini-card */
+      .mini-card {
+        position: absolute;
+        background: rgba(13, 20, 32, 0.9);
+        border: 1px solid rgba(63, 168, 255, 0.2);
+        border-radius: var(--radius);
+        padding: 0.875rem 1.125rem;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      }
+      .mini-card-1 {
+        bottom: -1.5rem;
+        left: -2rem;
+        animation: floatCard 6s ease-in-out infinite;
+      }
+      .mini-card-2 {
+        top: -1.5rem;
+        right: -1rem;
+        animation: floatCard 7s ease-in-out infinite reverse;
+      }
+      .mini-card-label {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+      }
+      .mini-card-val {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      .mini-card-val.green {
+        color: #4ade80;
+      }
+      .mini-card-val.blue {
+        color: var(--accent);
+      }
+      .mini-card-sub {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        margin-top: 0.125rem;
+      }
+      @keyframes floatCard {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      /* ─── SECTION HEADER ─────────────────────────────────────────────────────── */
+      .section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(63, 168, 255, 0.06);
+        border: 1px solid rgba(63, 168, 255, 0.15);
+        border-radius: var(--radius-pill);
+        padding: 0.3rem 0.875rem;
+        margin-bottom: 1.25rem;
+      }
+      .section-label-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gradient-hero);
+        flex-shrink: 0;
+      }
+      .section-label span {
+        color: rgba(163, 210, 255, 0.8);
+      }
+      .section-divider {
+        width: 60px;
+        height: 3px;
+        background: var(--gradient-hero);
+        border-radius: 2px;
+        margin: 1.25rem auto 0;
+      }
+
+      /* ─── ABOUT ──────────────────────────────────────────────────────────────── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 4rem;
+      }
+      .about-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 2rem 2.25rem;
+        transition:
+          border-color var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+      .about-card.wide {
+        grid-column: span 2;
+      }
+      .about-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradient-card);
+        opacity: 0;
+        transition: opacity var(--transition);
+        pointer-events: none;
+      }
+      .about-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+      }
+      .about-card:hover::after {
+        opacity: 1;
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(63, 168, 255, 0.08);
+        border: 1px solid rgba(63, 168, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .card-icon .material-symbols-rounded {
+        font-size: 22px;
+        color: var(--accent);
+      }
+      .card-title {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.625rem;
+      }
+      .card-body {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+      }
+
+      /* Stats row */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.625rem 1.75rem;
+        transition: all var(--transition);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+      }
+      .stat-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 0 30px var(--accent-glow);
+      }
+      .stat-number {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--gradient-hero);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 0.375rem;
+      }
+      .stat-label {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        line-height: 1.45;
+      }
+
+      /* ─── SERVICES ───────────────────────────────────────────────────────────── */
+      #services {
+        background: linear-gradient(
+          180deg,
+          var(--bg) 0%,
+          rgba(10, 15, 26, 0.5) 50%,
+          var(--bg) 100%
+        );
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      .service-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 1.875rem;
+        display: flex;
+        flex-direction: column;
+        transition: all var(--transition);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+      }
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+        background: var(--gradient-hero);
+        transition: height var(--transition);
+        opacity: 0.15;
+      }
+      .service-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.35),
+          0 0 0 1px rgba(63, 168, 255, 0.1);
+      }
+      .service-card:hover::before {
+        height: 3px;
+      }
+      .service-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        margin-bottom: 1.25rem;
+        background: rgba(63, 168, 255, 0.07);
+        border: 1px solid rgba(63, 168, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition);
+      }
+      .service-card:hover .service-icon {
+        background: rgba(63, 168, 255, 0.14);
+        border-color: rgba(63, 168, 255, 0.3);
+        box-shadow: 0 0 20px rgba(63, 168, 255, 0.15);
+      }
+      .service-icon .material-symbols-rounded {
+        font-size: 24px;
+        color: var(--accent);
+      }
+      .service-title {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+      }
+      .service-features {
+        list-style: none;
+        flex-grow: 1;
+        margin-bottom: 1.5rem;
+      }
+      .service-features li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.8375rem;
+        color: var(--text-secondary);
+        padding: 0.3rem 0;
+        border-top: 1px solid var(--border);
+      }
+      .service-features li:first-child {
+        border-top: none;
+      }
+      .service-features li .material-symbols-rounded {
+        font-size: 14px;
+        color: var(--accent-2);
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .btn-service {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-family: var(--font-display);
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: var(--accent);
+        border: 1px solid rgba(63, 168, 255, 0.2);
+        border-radius: var(--radius-sm);
+        padding: 0.625rem 1rem;
+        margin-top: auto;
+        transition: all var(--transition);
+        background: rgba(63, 168, 255, 0.04);
+      }
+      .btn-service:hover {
+        background: rgba(63, 168, 255, 0.12);
+        border-color: rgba(63, 168, 255, 0.4);
+        box-shadow: 0 0 20px rgba(63, 168, 255, 0.12);
+      }
+      .btn-service .material-symbols-rounded {
+        font-size: 16px;
+        transition: transform var(--transition);
+      }
+      .btn-service:hover .material-symbols-rounded {
+        transform: translateX(3px);
+      }
+      .services-cta {
+        text-align: center;
+        margin-top: 3rem;
+      }
+
+      /* ─── CONTACT ─────────────────────────────────────────────────────────────── */
+      .contact-wrap {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+      }
+      .contact-left {
+        padding: 3rem;
+        background: linear-gradient(
+          135deg,
+          rgba(63, 168, 255, 0.05) 0%,
+          rgba(0, 229, 195, 0.03) 100%
+        );
+        border-right: 1px solid var(--border);
+      }
+      .contact-right {
+        padding: 3rem;
+      }
+      .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .contact-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        flex-shrink: 0;
+        background: rgba(63, 168, 255, 0.08);
+        border: 1px solid rgba(63, 168, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .contact-icon .material-symbols-rounded {
+        font-size: 20px;
+        color: var(--accent);
+      }
+      .contact-info-label {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+      }
+      .contact-info-val {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      /* Form elements */
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .form-label {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .form-control {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 0.8rem 1rem;
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        transition: all var(--transition);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .form-control::placeholder {
+        color: var(--text-muted);
+      }
+      .form-control:focus {
+        border-color: rgba(63, 168, 255, 0.4);
+        background: rgba(63, 168, 255, 0.04);
+        box-shadow: 0 0 0 3px rgba(63, 168, 255, 0.08);
+      }
+      select.form-control {
+        cursor: pointer;
+      }
+      textarea.form-control {
+        resize: vertical;
+        min-height: 110px;
+      }
+      .btn-submit {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.9375rem;
+        color: #fff;
+        background: var(--gradient-hero);
+        border-radius: var(--radius-sm);
+        padding: 0.9375rem;
+        box-shadow: 0 0 25px rgba(63, 168, 255, 0.2);
+        transition: all var(--transition);
+      }
+      .btn-submit:hover {
+        box-shadow: 0 0 40px rgba(63, 168, 255, 0.4);
+        transform: translateY(-1px);
+      }
+      .btn-submit:disabled {
+        opacity: 0.6;
+        transform: none;
+        cursor: not-allowed;
+      }
+      .form-status {
+        display: none;
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+      .form-status.success {
+        background: rgba(74, 222, 128, 0.08);
+        border: 1px solid rgba(74, 222, 128, 0.25);
+        color: #4ade80;
+        display: block;
+      }
+      .form-status.error {
+        background: rgba(248, 113, 113, 0.08);
+        border: 1px solid rgba(248, 113, 113, 0.25);
+        color: #f87171;
+        display: block;
+      }
+      .form-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: 0.875rem;
+      }
+
+      /* ─── MODAL ──────────────────────────────────────────────────────────────── */
+      #modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      #modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 2.25rem;
+        width: 100%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .modal::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-hero);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.75rem;
+      }
+      .modal-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      .modal-close {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        background: rgba(255, 255, 255, 0.04);
+        transition: all var(--transition);
+      }
+      .modal-close:hover {
+        background: rgba(248, 113, 113, 0.1);
+        color: #f87171;
+      }
+
+      /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem 0;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        height: 30px;
+      }
+      .footer-logo img {
+        height: 100%;
+        width: auto;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.75rem;
+      }
+      .footer-link {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        transition: color var(--transition);
+      }
+      .footer-link:hover {
+        color: var(--text-secondary);
+      }
+      .footer-copy {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* ─── REVEAL ANIMATIONS ──────────────────────────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+      @media (max-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .hero-right {
+          display: none;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-card.wide {
+          grid-column: span 1;
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .contact-wrap {
+          grid-template-columns: 1fr;
+        }
+        .contact-left {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-actions {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.25rem;
+        }
+        .footer-links {
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-btns {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+    <!-- ═══ NAVBAR ════════════════════════════════════════════════════════════════ -->
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="#" class="nav-logo" aria-label="Synork Home">
+          <img src="/public/logo.png" alt="Synork" />
+        </a>
+
+        <div class="nav-links" role="list">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="/careers.html" class="nav-link">Careers</a>
+        </div>
+
+        <div class="nav-actions">
+          </div>
+          <!-- Logged out -->
+          <div
+            class="auth-logged-out"
+            style="align-items: center; gap: 0.75rem"
+          >
+            <a href="/login.html" class="btn-ghost">Log In</a>
+            <a href="/signup.html" class="btn-primary">Get Started</a>
+          </div>
+          <!-- Logged in -->
+          <div class="auth-logged-in" style="align-items: center; gap: 0.75rem">
+            <span id="nav-welcome"></span>
+            <button id="logout-btn" class="btn-logout">
+              <span class="material-symbols-rounded icon-sm">logout</span> Log
+              Out
+            </button>
+          </div>
+        </div>
+
+        <button
+          class="hamburger"
+          id="hamburger-btn"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="#about" class="mobile-nav-link" onclick="closeMobileNav()"
+        >About</a
+      >
+      <a href="#services" class="mobile-nav-link" onclick="closeMobileNav()"
+        >Services</a
+      >
+      <a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()"
+        >Contact</a
+      >
+      <a href="/careers.html" class="mobile-nav-link">Careers</a>
+      <div class="mobile-nav-divider"></div>
+      <div class="mobile-nav-actions mobile-auth-logged-out">
+        <a
+          href="/login.html"
+          class="btn-ghost"
+          style="text-align: center; border-radius: 10px; padding: 0.75rem"
+          >Log In</a
+        >
+        <a
+          href="/signup.html"
+          class="btn-primary"
+          style="text-align: center; border-radius: 10px; padding: 0.75rem"
+          >Get Started</a
+        >
+      </div>
+      <div
+        class="mobile-nav-actions mobile-auth-logged-in"
+        style="display: none"
+      >
+        <span
+          id="mobile-welcome"
+          style="
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+          "
+        ></span>
+        <button
+          id="logout-btn-mobile"
+          class="btn-logout"
+          style="border-radius: 10px; padding: 0.75rem; justify-content: center"
+        >
+          <span class="material-symbols-rounded icon-sm">logout</span> Log Out
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ HERO ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left -->
+          <div class="hero-left">
+            <div class="hero-badge" data-reveal>
+              <div class="hero-badge-dot"></div>
+              <span class="label-tag">Innovate with Intelligence</span>
+            </div>
+            <h1
+              class="display-l"
+              id="hero-heading"
+              data-reveal
+              style="transition-delay: 0.05s"
+            >
+              You bring the challenge.<br />
+              We engineer the<br />
+              <span class="text-gradient">intelligent solution.</span>
+            </h1>
+            <p
+              style="
+                font-size: 1.0625rem;
+                color: var(--text-secondary);
+                max-width: 520px;
+                margin-top: 1.5rem;
+                line-height: 1.7;
+              "
+              data-reveal
+              style="transition-delay: 0.1s"
+            >
+              From predictive data science models to robust cloud architecture —
+              we build modern, data-driven solutions for your toughest business
+              challenges.
+            </p>
+            <div class="hero-btns" data-reveal style="transition-delay: 0.15s">
+              <a href="#services" class="btn-hero-primary">
+                Explore Services
+                <span class="material-symbols-rounded" style="font-size: 20px"
+                  >arrow_forward</span
+                >
+              </a>
+              <a href="#contact" class="btn-hero-secondary">
+                Schedule a Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Right (widget) -->
+          <div
+            class="hero-right"
+            style="position: relative; padding: 2rem 2.5rem"
+            aria-hidden="true"
+          >
+            <div class="hero-widget" data-reveal>
+              <div class="widget-title">System Health</div>
+              <div class="widget-stat">
+                <span class="widget-stat-label">Data Throughput</span>
+                <span class="widget-stat-value">99.9%</span>
+              </div>
+              <div class="widget-bar-wrap">
+                <div
+                  class="widget-bar"
+                  data-width="99.9"
+                  style="width: 0"
+                ></div>
+              </div>
+              <div class="widget-stat">
+                <span class="widget-stat-label">Model Accuracy</span>
+                <span class="widget-stat-value">98.4%</span>
+              </div>
+              <div class="widget-bar-wrap">
+                <div
+                  class="widget-bar"
+                  data-width="98.4"
+                  style="width: 0"
+                ></div>
+              </div>
+              <div class="widget-stat">
+                <span class="widget-stat-label">Cloud Uptime</span>
+                <span class="widget-stat-value">99.8%</span>
+              </div>
+              <div class="widget-bar-wrap">
+                <div
+                  class="widget-bar"
+                  data-width="99.8"
+                  style="width: 0"
+                ></div>
+              </div>
+              <div class="widget-status">
+                <div class="status-dot"></div>
+                <span class="status-text"
+                  >All systems operational · Last check 2 min ago</span
+                >
+              </div>
+            </div>
+
+            <div class="mini-card mini-card-1">
+              <div class="mini-card-label">Projects Delivered</div>
+              <div class="mini-card-val blue">50+</div>
+              <div class="mini-card-sub">100% on-time</div>
+            </div>
+            <div class="mini-card mini-card-2">
+              <div class="mini-card-label">Cost Reduction</div>
+              <div class="mini-card-val green">60%</div>
+              <div class="mini-card-sub">avg. savings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ════════════════════════════════════════════════════════════════ -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <div class="section-label-dot"></div>
+            <span class="label-tag">About Synork</span>
+          </div>
+          <h2 class="display-lg" id="about-heading">
+            We Engineer Intelligent Systems
+          </h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card wide reveal">
+            <div class="card-icon">
+              <span class="material-symbols-rounded">rocket_launch</span>
+            </div>
+            <div class="card-title">Our Mission</div>
+            <p class="card-body">
+              To empower organizations with computational intelligence. We
+              translate raw, complex data into refined, actionable software
+              systems that automate workflows, predict outcomes, and provide a
+              definitive competitive edge in a digital-first economy.
+            </p>
+          </div>
+          <div class="about-card reveal reveal-delay-1">
+            <div class="card-icon">
+              <span class="material-symbols-rounded">visibility</span>
+            </div>
+            <div class="card-title">Our Vision</div>
+            <p class="card-body">
+              A future where every enterprise operates at peak efficiency,
+              driven by seamless integration of artificial intelligence and
+              robust data infrastructure.
+            </p>
+          </div>
+          <div class="about-card reveal reveal-delay-2">
+            <div class="card-icon">
+              <span class="material-symbols-rounded">handshake</span>
+            </div>
+            <div class="card-title">Our Promise</div>
+            <p class="card-body">
+              Transparent, fixed-price milestones — no hidden costs, ever. Every
+              project is delivered with fully documented, production-grade code
+              and ongoing support.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-header reveal" style="margin-bottom: 2rem">
+          <h3 class="display-md">Our Impact</h3>
+          <p
+            style="
+              color: var(--text-secondary);
+              font-size: 0.9375rem;
+              margin-top: 0.5rem;
+            "
+          >
+            Delivering measurable excellence through technical precision.
+          </p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card reveal">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">
+              Predictive modeling, data pipeline & architecture projects
+              completed
+            </div>
+          </div>
+          <div class="stat-card reveal reveal-delay-1">
+            <div class="stat-number">60%</div>
+            <div class="stat-label">
+              Average reduction in processing times & infrastructure costs
+            </div>
+          </div>
+          <div class="stat-card reveal reveal-delay-2">
+            <div class="stat-number">99.8%</div>
+            <div class="stat-label">
+              System uptime across all cloud & DevOps deployments
+            </div>
+          </div>
+          <div class="stat-card reveal reveal-delay-3">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">
+              On-time delivery with fully documented, high-quality code
+            </div>
+          </div>
+          <div class="stat-card reveal reveal-delay-4">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">
+              Improvement in client forecasting accuracy, on average
+            </div>
+          </div>
+          <div class="stat-card reveal reveal-delay-1">
+            <div class="stat-number">Fixed</div>
+            <div class="stat-label">
+              Price project milestones — transparent, no hidden costs, ever
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ═════════════════════════════════════════════════════════════ -->
+    <section class="section" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <div class="section-label-dot"></div>
+            <span class="label-tag">What We Build</span>
+          </div>
+          <h2 class="display-lg" id="services-heading">Core Services</h2>
+          <p
+            style="
+              color: var(--text-secondary);
+              max-width: 500px;
+              margin: 0.75rem auto 0;
+              font-size: 0.9375rem;
+            "
+          >
+            Precision-engineered solutions across the full data and software
+            lifecycle.
+          </p>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">psychology</span>
+            </div>
+            <div class="service-title">Data Science & AI Solutions</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Predictive Modeling
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Data
+                Classification
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Deep
+                Learning
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Exploratory Data Analysis
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 2 -->
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">bar_chart</span>
+            </div>
+            <div class="service-title">Business Intelligence & Analytics</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Interactive Dashboards
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Data
+                Processing
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Workflow Automation
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 3 -->
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">terminal</span>
+            </div>
+            <div class="service-title">Custom Web Application Development</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Interactive Tool Development
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>API
+                Integration
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Repository Management
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 4 -->
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">architecture</span>
+            </div>
+            <div class="service-title">Technical Consulting & Strategy</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Technology Selection
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Model
+                Optimization
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Architecture Design
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 5 -->
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">smart_toy</span>
+            </div>
+            <div class="service-title">
+              Artificial Intelligence & Automation
+            </div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>AI
+                Integration (LLMs)
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Agentic AI Systems
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >AI-Readiness Assessments
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 6 -->
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">cloud_queue</span>
+            </div>
+            <div class="service-title">
+              Cloud Computing & Platform Engineering
+            </div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Cloud
+                Architecture
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>DevOps
+                & CI/CD
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Cloud
+                Migration
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 7 -->
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">security</span>
+            </div>
+            <div class="service-title">Cybersecurity & Data Protection</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Security Audits
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Data &
+                Cloud Security
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Compliance Consulting
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 8 -->
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">storage</span>
+            </div>
+            <div class="service-title">Big Data Engineering</div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>Data
+                Pipeline Development
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Database Management
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>BI
+                Solutions
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Service 9 -->
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon">
+              <span class="material-symbols-rounded">developer_board</span>
+            </div>
+            <div class="service-title">
+              Custom Software & Platform Development
+            </div>
+            <ul class="service-features">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>MVP
+                Development
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>API
+                Development
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span
+                >Responsive UI/UX
+              </li>
+            </ul>
+            <button onclick="openModal()" class="btn-service">
+              Get Started
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="services-cta reveal">
+          <a
+            href="#contact"
+            class="btn-hero-primary"
+            style="display: inline-flex"
+          >
+            <span class="material-symbols-rounded" style="font-size: 20px"
+              >apps</span
+            >
+            Discuss Your Project
+            <span class="material-symbols-rounded" style="font-size: 20px"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <div class="section-label-dot"></div>
+            <span class="label-tag">Work With Us</span>
+          </div>
+          <h2 class="display-lg" id="contact-heading">Initiate a Project</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="contact-wrap reveal">
+          <div class="contact-left">
+            <h3 class="display-md" style="margin-bottom: 1rem">
+              Let's build something intelligent together.
+            </h3>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+              "
+            >
+              Ready to transform your data infrastructure or build a custom
+              application? Our engineering team will propose a strategic
+              architecture within 24 hours.
+            </p>
+
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">mail</span>
+              </div>
+              <div>
+                <div class="contact-info-label">Direct Email</div>
+                <a
+                  href="mailto:synorktechnologies@gmail.com"
+                  class="contact-info-val"
+                  style="color: var(--accent)"
+                  >synorktechnologies@gmail.com</a
+                >
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">location_on</span>
+              </div>
+              <div>
+                <div class="contact-info-label">Headquarters</div>
+                <div class="contact-info-val">Pune, Maharashtra, India</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">schedule</span>
+              </div>
+              <div>
+                <div class="contact-info-label">Response Time</div>
+                <div class="contact-info-val">Within 24 hours</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-right">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="c-name">Full Name</label>
+                  <input
+                    class="form-control"
+                    id="c-name"
+                    name="name"
+                    type="text"
+                    placeholder="John Doe"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+                <div>
+                  <label class="form-label" for="c-email">Work Email</label>
+                  <input
+                    class="form-control"
+                    id="c-email"
+                    name="email"
+                    type="email"
+                    placeholder="john@company.com"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="c-service"
+                  >Primary Interest</label
+                >
+                <select
+                  class="form-control"
+                  id="c-service"
+                  name="service"
+                  required
+                >
+                  <option value="" disabled selected>Select a Service</option>
+                  <option value="data-science-ai">
+                    Data Science & AI Solutions
+                  </option>
+                  <option value="bi-analytics">
+                    Business Intelligence & Analytics
+                  </option>
+                  <option value="web-app-dev">
+                    Custom Web Application Development
+                  </option>
+                  <option value="technical-consulting">
+                    Technical Consulting & Strategy
+                  </option>
+                  <option value="ai-automation">
+                    Artificial Intelligence & Automation
+                  </option>
+                  <option value="cloud-platform">
+                    Cloud Computing & Platform Engineering
+                  </option>
+                  <option value="cybersecurity">
+                    Cybersecurity & Data Protection
+                  </option>
+                  <option value="big-data">Big Data Engineering</option>
+                  <option value="custom-software">
+                    Custom Software & Platform Development
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="c-details"
+                  >Project Overview</label
+                >
+                <textarea
+                  class="form-control"
+                  id="c-details"
+                  name="details"
+                  placeholder="Briefly describe your objectives and challenges..."
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-submit" id="contact-submit">
+                Submit Inquiry
+                <span class="material-symbols-rounded" style="font-size: 20px"
+                  >send</span
+                >
+              </button>
+              <div id="contactStatus" class="form-status"></div>
+              <p class="form-note">
+                🔒 All submissions are encrypted and strictly confidential.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MODAL ════════════════════════════════════════════════════════════════ -->
+    <div
+      id="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Start Your Project</h3>
+          <button
+            class="modal-close"
+            id="modal-close-btn"
+            aria-label="Close modal"
+          >
+            <span class="material-symbols-rounded" style="font-size: 20px"
+              >close</span
+            >
+          </button>
+        </div>
+        <form id="getStartedForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="gs-name">Full Name</label>
+            <input
+              class="form-control"
+              id="gs-name"
+              type="text"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-email">Work Email</label>
+            <input
+              class="form-control"
+              id="gs-email"
+              type="email"
+              placeholder="john@company.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-service"
+              >Service of Interest</label
+            >
+            <select class="form-control" id="gs-service" required>
+              <option value="" disabled selected>Select a Service</option>
+              <option value="data-science-ai">
+                Data Science & AI Solutions
+              </option>
+              <option value="bi-analytics">
+                Business Intelligence & Analytics
+              </option>
+              <option value="web-app-dev">
+                Custom Web Application Development
+              </option>
+              <option value="technical-consulting">
+                Technical Consulting & Strategy
+              </option>
+              <option value="ai-automation">
+                Artificial Intelligence & Automation
+              </option>
+              <option value="cloud-platform">
+                Cloud Computing & Platform Engineering
+              </option>
+              <option value="cybersecurity">
+                Cybersecurity & Data Protection
+              </option>
+              <option value="big-data">Big Data Engineering</option>
+              <option value="custom-software">
+                Custom Software & Platform Development
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-project-type">Project Type</label>
+            <select class="form-control" id="gs-project-type" required>
+              <option value="" disabled selected>Select Type</option>
+              <option value="new-development">New Development</option>
+              <option value="enhancement">Existing System Enhancement</option>
+              <option value="migration">System Migration</option>
+              <option value="consultation">Technical Consultation</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-budget">Budget Range</label>
+            <select class="form-control" id="gs-budget" required>
+              <option value="" disabled selected>Select Range</option>
+              <option value="under-10k">Under $10,000</option>
+              <option value="10k-25k">$10,000 – $25,000</option>
+              <option value="25k-50k">$25,000 – $50,000</option>
+              <option value="50k-100k">$50,000 – $100,000</option>
+              <option value="over-100k">Over $100,000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-timeline">Timeline</label>
+            <select class="form-control" id="gs-timeline" required>
+              <option value="" disabled selected>Select Timeline</option>
+              <option value="asap">ASAP</option>
+              <option value="1-3-months">1–3 Months</option>
+              <option value="3-6-months">3–6 Months</option>
+              <option value="6-months-plus">6+ Months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gs-details"
+              >Project Description</label
+            >
+            <textarea
+              class="form-control"
+              id="gs-details"
+              placeholder="Describe your project requirements and goals..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="gs-submit">
+            Submit Project Inquiry
+            <span class="material-symbols-rounded" style="font-size: 20px"
+              >send</span
+            >
+          </button>
+          <div id="gsStatus" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <a href="#" class="footer-logo" aria-label="Synork">
+            <img src="/public/logo.png" alt="Synork" />
+          </a>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Security</a>
+            <a href="#contact" class="footer-link">Contact</a>
+          </div>
+          <div class="footer-copy">© 2026 Synork. All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ─── NAVBAR SCROLL ─────────────────────────────────────────────────────────
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          navbar.classList.toggle("scrolled", window.scrollY > 40);
+        },
+        { passive: true },
+      );
+
+      // ─── MOBILE NAV ────────────────────────────────────────────────────────────
+      const hamburger = document.getElementById("hamburger-btn");
+      const mobileNav = document.getElementById("mobile-nav");
+      hamburger.addEventListener("click", () => {
+        const open = mobileNav.classList.toggle("open");
+        hamburger.classList.toggle("open", open);
+        hamburger.setAttribute("aria-expanded", open);
+      });
+      function closeMobileNav() {
+        mobileNav.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
+      }
+      document.addEventListener("click", (e) => {
+        if (!hamburger.contains(e.target) && !mobileNav.contains(e.target))
+          closeMobileNav();
+      });
+
+      // ─── AUTH ──────────────────────────────────────────────────────────────────
+      function checkAuth() {
+        try {
+          const user = JSON.parse(
+            localStorage.getItem("synork_user") || "null",
+          );
+          if (user) {
+            document.body.classList.add("logged-in");
+            document.getElementById("nav-welcome").textContent =
+              "Hi, " + user.firstName;
+            const mob = document.getElementById("mobile-welcome");
+            if (mob) mob.textContent = "Hi, " + user.firstName;
+          } else {
+            document.body.classList.remove("logged-in");
+          }
+        } catch (e) {}
+      }
+      function logout() {
+        localStorage.removeItem("synork_user");
+        checkAuth();
+      }
+      document.getElementById("logout-btn").addEventListener("click", logout);
+      const logoutMobile = document.getElementById("logout-btn-mobile");
+      if (logoutMobile) logoutMobile.addEventListener("click", logout);
+      checkAuth();
+
+      // ─── MODAL ─────────────────────────────────────────────────────────────────
+      const overlay = document.getElementById("modal-overlay");
+      function openModal() {
+        overlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal() {
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      document
+        .getElementById("modal-close-btn")
+        .addEventListener("click", closeModal);
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      // ─── CONTACT FORM ──────────────────────────────────────────────────────────
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const btn = document.getElementById("contact-submit");
+          const status = document.getElementById("contactStatus");
+          btn.disabled = true;
+          btn.innerHTML =
+            'Sending... <span class="material-symbols-rounded" style="font-size:20px;animation:spin 1s linear infinite;">progress_activity</span>';
+          status.className = "form-status";
+          try {
+            const res = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: document.getElementById("c-name").value,
+                email: document.getElementById("c-email").value,
+                service: document.getElementById("c-service").value,
+                details: document.getElementById("c-details").value,
+              }),
+            });
+            if (res.ok) {
+              status.className = "form-status success";
+              status.textContent =
+                "✓ Inquiry submitted! We'll be in touch within 24 hours.";
+              this.reset();
+            } else throw new Error();
+          } catch {
+            status.className = "form-status error";
+            status.textContent =
+              "✗ Submission failed. Please email synorktechnologies@gmail.com directly.";
+          }
+          btn.disabled = false;
+          btn.innerHTML =
+            'Submit Inquiry <span class="material-symbols-rounded" style="font-size:20px;">send</span>';
+        });
+
+      // ─── GET STARTED FORM ──────────────────────────────────────────────────────
+      document
+        .getElementById("getStartedForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const btn = document.getElementById("gs-submit");
+          const status = document.getElementById("gsStatus");
+          btn.disabled = true;
+          btn.textContent = "Sending...";
+          status.className = "form-status";
+          try {
+            const res = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: document.getElementById("gs-name").value,
+                email: document.getElementById("gs-email").value,
+                service: document.getElementById("gs-service").value,
+                projectType: document.getElementById("gs-project-type").value,
+                budget: document.getElementById("gs-budget").value,
+                timeline: document.getElementById("gs-timeline").value,
+                details: document.getElementById("gs-details").value,
+              }),
+            });
+            if (res.ok) {
+              status.className = "form-status success";
+              status.textContent =
+                "✓ Project inquiry submitted! We'll be in touch soon.";
+              this.reset();
+              setTimeout(closeModal, 2200);
+            } else throw new Error();
+          } catch {
+            status.className = "form-status error";
+            status.textContent =
+              "✗ Failed. Please email synorktechnologies@gmail.com directly.";
+          }
+          btn.disabled = false;
+          btn.innerHTML =
+            'Submit Project Inquiry <span class="material-symbols-rounded" style="font-size:20px;">send</span>';
+        });
+      const searchClear = document.getElementById("site-search-clear");
+      const searchStatus = document.getElementById("search-status");
+
+      function clearSearchHighlights() {
+        document.querySelectorAll(".search-match").forEach((el) => {
+          el.classList.remove("search-match");
+        });
+      }
+
+      function runSiteSearch() {
+        if (!searchInput) return;
+        clearSearchHighlights();
+
+        const term = searchInput.value.trim().toLowerCase();
+        if (!term) {
+          if (searchStatus) searchStatus.textContent = "Search this page text.";
+          return;
+        }
+
+        const elements = Array.from(
+          document.querySelectorAll(
+            "section, header, h1, h2, h3, p, li, a, .hero-badge, .hero-widget",
+          ),
+        ).filter((el) => el.textContent.trim().length > 0);
+
+        const matches = elements.filter((el) =>
+          el.textContent.toLowerCase().includes(term),
+        );
+
+        if (matches.length === 0) {
+          if (searchStatus)
+            searchStatus.textContent = `No matches for "${term}".`;
+          return;
+        }
+
+        matches.slice(0, 30).forEach((el) => el.classList.add("search-match"));
+        matches[0].scrollIntoView({ behavior: "smooth", block: "center" });
+        if (searchStatus)
+          searchStatus.textContent = `${matches.length} matching section${
+            matches.length === 1 ? "" : "s"
+          } found.`;
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", runSiteSearch);
+      }
+      if (searchClear) {
+        searchClear.addEventListener("click", () => {
+          if (!searchInput) return;
+          searchInput.value = "";
+          clearSearchHighlights();
+          if (searchStatus) searchStatus.textContent = "Search this page text.";
+          searchInput.focus();
+        });
+      }
+
+      // ─── REVEAL ANIMATIONS ─────────────────────────────────────────────────────
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((el) => {
+            if (el.isIntersecting) {
+              el.target.classList.add("visible");
+              revealObs.unobserve(el.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      document.querySelectorAll(".reveal, [data-reveal]").forEach((el) => {
+        el.classList.add("reveal");
+        revealObs.observe(el);
+      });
+
+      // ─── WIDGET BAR ANIMATION ──────────────────────────────────────────────────
+      const barObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.querySelectorAll(".widget-bar").forEach((bar) => {
+                bar.style.width = bar.dataset.width + "%";
+              });
+              barObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.4 },
+      );
+      document
+        .querySelectorAll(".hero-widget")
+        .forEach((w) => barObs.observe(w));
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const target = document.querySelector(a.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            closeMobileNav();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
