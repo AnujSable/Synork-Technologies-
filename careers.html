@@ -12,7 +12,38 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <script type="module" src="/src/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#080c14",
+              surface: "#0d1421",
+              "surface-container": "#111827",
+              "surface-container-high": "#1a2332",
+              "surface-container-highest": "#1f2d3d",
+              "surface-container-low": "#0a1020",
+              "surface-container-lowest": "#060a10",
+              "surface-bright": "#1e2d42",
+              "on-surface": "#e2e8f0",
+              "on-surface-variant": "#94a3b8",
+              primary: "#38bdf8",
+              "primary-container": "#38bdf8",
+              "on-primary-container": "#0c1a2e",
+              secondary: "#818cf8",
+              outline: "#475569",
+              "outline-variant": "#1e293b",
+            },
+            fontFamily: {
+              display: ['"Space Grotesk"', "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
     <style>
       #mobile-menu {
         display: none;
@@ -79,7 +110,7 @@
           <img
             alt="Synork Logo"
             class="h-full w-auto object-contain"
-            src="./logo.png"
+            src="/public/logo.png"
           />
         </a>
 
@@ -89,22 +120,22 @@
         >
           <a
             class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            href="./index.html#about"
+            href="/Synork-Technologies-/index.html#about"
             >About</a
           >
           <a
             class="text-[#94A3B8] hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg no-underline"
-            href="./index.html#services"
+            href="/Synork-Technologies-/index.html#services"
             >Services</a
           >
           <a
             class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            href="./index.html#contact"
+            href="/Synork-Technologies-/index.html#contact"
             >Contact</a
           >
           <a
             class="text-slate-400 hover:text-sky-400 hover:bg-slate-900/50 px-3 py-2 rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            href="./careers.html"
+            href="/Synork-Technologies-/careers.html"
             >Careers</a
           >
         </div>
@@ -114,12 +145,12 @@
           <div class="auth-logged-out items-center gap-3">
             <a
               class="inline-flex items-center justify-center px-4 py-2 border border-outline-variant text-on-surface text-sm rounded hover:bg-surface-container-high transition-colors"
-              href="./login.html"
+              href="/Synork-Technologies-/login.html"
               >Log In</a
             >
             <a
               class="inline-flex items-center justify-center px-4 py-2 bg-primary-container text-on-primary-container text-sm rounded font-semibold hover:bg-primary transition-colors glow-primary"
-              href="./signup.html"
+              href="/Synork-Technologies-/signup.html"
               >Sign Up</a
             >
           </div>
@@ -156,25 +187,25 @@
       >
         <a
           class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
-          href="./index.html#about"
+          href="/Synork-Technologies-/index.html#about"
           onclick="closeMobileMenu()"
           >About</a
         >
         <a
           class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
-          href="./index.html#services"
+          href="/Synork-Technologies-/index.html#services"
           onclick="closeMobileMenu()"
           >Services</a
         >
         <a
           class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
-          href="./index.html#contact"
+          href="/Synork-Technologies-/index.html#contact"
           onclick="closeMobileMenu()"
           >Contact</a
         >
         <a
           class="text-slate-300 hover:text-sky-400 px-3 py-3 rounded hover:bg-slate-900 transition-colors block text-sm"
-          href="./careers.html"
+          href="/Synork-Technologies-/careers.html"
           onclick="closeMobileMenu()"
           >Careers</a
         >
@@ -182,12 +213,12 @@
           <div class="auth-logged-out flex-col gap-2">
             <a
               class="flex items-center justify-center px-4 py-3 border border-outline-variant text-on-surface rounded text-sm hover:bg-surface-container-high transition-colors"
-              href="./login.html"
+              href="/Synork-Technologies-/login.html"
               >Log In</a
             >
             <a
               class="flex items-center justify-center px-4 py-3 bg-primary-container text-on-primary-container rounded font-semibold text-sm hover:bg-primary transition-colors"
-              href="./signup.html"
+              href="/Synork-Technologies-/signup.html"
               >Sign Up</a
             >
           </div>
@@ -986,7 +1017,7 @@
           <img
             alt="Synork Logo"
             class="h-full w-auto object-contain"
-            src="./logo.png"
+            src="/public/logo.png"
           />
         </div>
         <div
@@ -994,22 +1025,22 @@
         >
           <a
             class="text-slate-500 hover:text-slate-100 transition-colors"
-            href="./index.html#about"
+            href="/Synork-Technologies-/index.html#about"
             >About</a
           >
           <a
             class="text-slate-500 hover:text-slate-100 transition-colors"
-            href="./index.html#services"
+            href="/Synork-Technologies-/index.html#services"
             >Services</a
           >
           <a
             class="text-slate-500 hover:text-slate-100 transition-colors"
-            href="./index.html#contact"
+            href="/Synork-Technologies-/index.html#contact"
             >Contact</a
           >
           <a
             class="text-slate-500 hover:text-slate-100 transition-colors"
-            href="./careers.html"
+            href="/Synork-Technologies-/careers.html"
             >Careers</a
           >
         </div>
