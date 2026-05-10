@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1206,11 +1206,8 @@
 
       /* ─── REVEAL ANIMATIONS ──────────────────────────────────────────────────── */
       .reveal {
-        opacity: 0;
-        transform: translateY(28px);
-        transition:
-          opacity 0.65s ease,
-          transform 0.65s ease;
+        opacity: 1;
+        transform: none;
       }
       .reveal.visible {
         opacity: 1;
@@ -1312,17 +1309,17 @@
           <a href="/careers.html" class="nav-link">Careers</a>
         </div>
 
-        <div class="nav-actions" style="display:flex; align-items:center; gap:0.75rem;">
+        <div class="nav-actions">
           <!-- Logged out -->
           <div
             class="auth-logged-out"
-            style="display:flex; align-items: center; gap: 0.75rem"
+            style="align-items: center; gap: 0.75rem"
           >
             <a href="/login.html" class="btn-ghost">Log In</a>
             <a href="/signup.html" class="btn-primary">Get Started</a>
           </div>
           <!-- Logged in -->
-          <div class="auth-logged-in" style="display:flex; align-items: center; gap: 0.75rem">
+          <div class="auth-logged-in" style="align-items: center; gap: 0.75rem">
             <span id="nav-welcome"></span>
             <button id="logout-btn" class="btn-logout">
               <span class="material-symbols-rounded icon-sm">logout</span> Log
@@ -1507,7 +1504,7 @@
     <!-- ═══ ABOUT ════════════════════════════════════════════════════════════════ -->
     <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <div class="section-header reveal">
+        <div class="section-header" data-reveal>
           <div class="section-label">
             <div class="section-label-dot"></div>
             <span class="label-tag">About Synork</span>
@@ -1555,7 +1552,7 @@
           </div>
         </div>
 
-        <div class="section-header reveal" style="margin-bottom: 2rem">
+        <div class="section-header" style="margin-bottom: 2rem" data-reveal>
           <h3 class="display-md">Our Impact</h3>
           <p
             style="
@@ -1613,7 +1610,7 @@
     <!-- ═══ SERVICES ═════════════════════════════════════════════════════════════ -->
     <section class="section" id="services" aria-labelledby="services-heading">
       <div class="container">
-        <div class="section-header reveal">
+        <div class="section-header" data-reveal>
           <div class="section-label">
             <div class="section-label-dot"></div>
             <span class="label-tag">What We Build</span>
@@ -1892,7 +1889,7 @@
     <!-- ═══ CONTACT ══════════════════════════════════════════════════════════════ -->
     <section class="section" id="contact" aria-labelledby="contact-heading">
       <div class="container">
-        <div class="section-header reveal">
+        <div class="section-header" data-reveal>
           <div class="section-label">
             <div class="section-label-dot"></div>
             <span class="label-tag">Work With Us</span>
@@ -1901,7 +1898,7 @@
           <div class="section-divider"></div>
         </div>
 
-        <div class="contact-wrap reveal">
+        <div class="contact-wrap" data-reveal>
           <div class="contact-left">
             <h3 class="display-md" style="margin-bottom: 1rem">
               Let's build something intelligent together.
@@ -2199,6 +2196,8 @@
     </footer>
 
     <script>
+      document.documentElement.classList.remove("no-js");
+
       // ─── NAVBAR SCROLL ─────────────────────────────────────────────────────────
       const navbar = document.getElementById("navbar");
       window.addEventListener(
@@ -2248,7 +2247,8 @@
         localStorage.removeItem("synork_user");
         checkAuth();
       }
-      document.getElementById("logout-btn").addEventListener("click", logout);
+      const logoutBtn = document.getElementById("logout-btn");
+      if (logoutBtn) logoutBtn.addEventListener("click", logout);
       const logoutMobile = document.getElementById("logout-btn-mobile");
       if (logoutMobile) logoutMobile.addEventListener("click", logout);
       checkAuth();
@@ -2263,20 +2263,21 @@
         overlay.classList.remove("open");
         document.body.style.overflow = "";
       }
-      document
-        .getElementById("modal-close-btn")
-        .addEventListener("click", closeModal);
-      overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) closeModal();
-      });
+      const modalCloseButton = document.getElementById("modal-close-btn");
+      if (modalCloseButton) modalCloseButton.addEventListener("click", closeModal);
+      if (overlay) {
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
+        });
+      }
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeModal();
       });
 
       // ─── CONTACT FORM ──────────────────────────────────────────────────────────
-      document
-        .getElementById("contactForm")
-        .addEventListener("submit", async function (e) {
+      const contactForm = document.getElementById("contactForm");
+      if (contactForm) {
+        contactForm.addEventListener("submit", async function (e) {
           e.preventDefault();
           const btn = document.getElementById("contact-submit");
           const status = document.getElementById("contactStatus");
@@ -2310,11 +2311,12 @@
           btn.innerHTML =
             'Submit Inquiry <span class="material-symbols-rounded" style="font-size:20px;">send</span>';
         });
+      }
 
       // ─── GET STARTED FORM ──────────────────────────────────────────────────────
-      document
-        .getElementById("getStartedForm")
-        .addEventListener("submit", async function (e) {
+      const getStartedForm = document.getElementById("getStartedForm");
+      if (getStartedForm) {
+        getStartedForm.addEventListener("submit", async function (e) {
           e.preventDefault();
           const btn = document.getElementById("gs-submit");
           const status = document.getElementById("gsStatus");
@@ -2351,6 +2353,8 @@
           btn.innerHTML =
             'Submit Project Inquiry <span class="material-symbols-rounded" style="font-size:20px;">send</span>';
         });
+      }
+      const searchInput = document.getElementById("site-search-input");
       const searchClear = document.getElementById("site-search-clear");
       const searchStatus = document.getElementById("search-status");
 
@@ -2408,21 +2412,28 @@
       }
 
       // ─── REVEAL ANIMATIONS ─────────────────────────────────────────────────────
-      const revealObs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((el) => {
-            if (el.isIntersecting) {
-              el.target.classList.add("visible");
-              revealObs.unobserve(el.target);
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-      );
+      const revealObs =
+        typeof IntersectionObserver !== "undefined"
+          ? new IntersectionObserver(
+              (entries) => {
+                entries.forEach((el) => {
+                  if (el.isIntersecting) {
+                    el.target.classList.add("visible");
+                    revealObs.unobserve(el.target);
+                  }
+                });
+              },
+              { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+            )
+          : null;
 
       document.querySelectorAll(".reveal, [data-reveal]").forEach((el) => {
         el.classList.add("reveal");
-        revealObs.observe(el);
+        if (revealObs) {
+          revealObs.observe(el);
+        } else {
+          el.classList.add("visible");
+        }
       });
 
       // ─── WIDGET BAR ANIMATION ──────────────────────────────────────────────────
@@ -2444,19 +2455,13 @@
         .forEach((w) => barObs.observe(w));
 
       // Smooth scroll for anchor links
-      const navHeight = document.getElementById("navbar")?.offsetHeight || 72;
-      document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((a) => {
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
-          const href = a.getAttribute("href");
-          const target = href ? document.querySelector(href) : null;
+          const target = document.querySelector(a.getAttribute("href"));
           if (target) {
             e.preventDefault();
-            const targetTop = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: Math.max(targetTop - navHeight - 12, 0),
-              behavior: "smooth",
-            });
-            if (typeof closeMobileNav === "function") closeMobileNav();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            closeMobileNav();
           }
         });
       });
